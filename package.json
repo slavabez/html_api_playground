@@ -1,0 +1,29 @@
+{
+  "name": "html_api_playground",
+  "version": "0.0.1",
+  "description": "Playgroudn for various html apis",
+  "main": "entry.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/slavabez/html_api_playground.git"
+  },
+  "author": "Slava Bezgachev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slavabez/html_api_playground/issues"
+  },
+  "homepage": "https://github.com/slavabez/html_api_playground#readme",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.7",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
