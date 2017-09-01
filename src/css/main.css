@@ -1,0 +1,15 @@
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#geo_output {
+    margin: 0.5rem;
+    color: red;
+}

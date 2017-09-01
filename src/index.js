@@ -1,8 +1,8 @@
 import "./css/main.css";
+import geolocation from './geolocation';
 
-console.log("Webpack works, ES6 works");
 
-{
-   console.log('IFFE coming through');
 
-}
+document.addEventListener("DOMContentLoaded", function(event) {
+    geolocation();
+});
