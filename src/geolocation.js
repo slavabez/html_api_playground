@@ -32,7 +32,7 @@ export default function geoInit() {
                 // On success
                 let latlon = location.coords.latitude + "," + location.coords.longitude;
                 let imgUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
-                    +latlon+"&zoom=14&size=400x300&key=AIzaSyDZEfAsf5P90STLksy-gWBhsUOZOJvanyo";
+                    +latlon+"&zoom=14&size=400x300";
                 document.getElementById('geo_output').innerHTML = `<p>Your browser says you're somewhere here</p><img src="${imgUrl}" />`;
             },
             (error) => {
