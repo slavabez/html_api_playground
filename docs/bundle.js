@@ -72,11 +72,15 @@
 
 __webpack_require__(1);
 
-console.log("Webpack works, ES6 works");
+var _geolocation = __webpack_require__(6);
 
-{
-   console.log('IFFE coming through');
-}
+var _geolocation2 = _interopRequireDefault(_geolocation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+    (0, _geolocation2.default)();
+});
 
 /***/ }),
 /* 1 */
@@ -118,7 +122,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "* {\r\n    /*\r\n    Testing webpack loading\r\n     */\r\n    color: red;\r\n}", ""]);
+exports.push([module.i, "main {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.content {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: column;\r\n}\r\n\r\n#geo_output {\r\n    margin: 0.5rem;\r\n    color: red;\r\n}", ""]);
 
 // exports
 
@@ -658,6 +662,62 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = geoInit;
+// Wrap in an IFFE to preserve scope
+
+function geoInit() {
+
+    console.log('Initialising the geo module');
+
+    var showMessage = function showMessage(message) {
+        var outputBox = document.getElementById('geo_output');
+        outputBox.innerText = message;
+    };
+
+    var onPermissionClick = function onPermissionClick(e) {
+        e.preventDefault();
+
+        navigator.geolocation.getCurrentPosition(function () {
+            // Do nothing on success
+            showMessage('We have your location!');
+        }, function (error) {
+            // On error
+            showMessage(error.message);
+        });
+    };
+
+    var onGetLocationClick = function onGetLocationClick(e) {
+        e.preventDefault();
+
+        navigator.geolocation.getCurrentPosition(function (location) {
+            // On success
+            var latlon = location.coords.latitude + "," + location.coords.longitude;
+            var imgUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=400x300";
+            document.getElementById('geo_output').innerHTML = '<p>Your browser says you\'re somewhere here</p><img src="' + imgUrl + '" />';
+        }, function (error) {
+            // On error
+            showMessage(error.message);
+        });
+    };
+
+    // Attach listeners to buttons
+    var permissionButton = document.getElementById('geo_permission');
+    permissionButton.onclick = onPermissionClick;
+
+    var getLocationButton = document.getElementById('geo_locate');
+    getLocationButton.onclick = onGetLocationClick;
+}
 
 /***/ })
 /******/ ]);
