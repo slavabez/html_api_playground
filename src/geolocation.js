@@ -1,4 +1,6 @@
 // Wrap in an IFFE to preserve scope
+import * as googleMaps from 'google-maps';
+googleMaps.KEY = 'AIzaSyBiPDvQTDuSyrdq-oxGKni19qnUNLK87Fo';
 
 export default function geoInit() {
 
@@ -30,10 +32,12 @@ export default function geoInit() {
         navigator.geolocation.getCurrentPosition(
             (location) => {
                 // On success
-                let latlon = location.coords.latitude + "," + location.coords.longitude;
-                let imgUrl = "https://maps.googleapis.com/maps/api/staticmap?center="
-                    +latlon+"&zoom=14&size=400x300";
-                document.getElementById('geo_output').innerHTML = `<p>Your browser says you're somewhere here</p><img src="${imgUrl}" />`;
+                let latLon = {lat: location.coords.latitude, lng: location.coords.longitude};
+                googleMaps.load((google) => {
+                    new google.maps.Map('map')
+                });
+
+
             },
             (error) => {
                 // On error
